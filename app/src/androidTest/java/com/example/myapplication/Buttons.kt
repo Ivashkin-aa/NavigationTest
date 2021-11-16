@@ -1,11 +1,10 @@
-package com.example.navtest
+package com.example.myapplication
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import com.example.myapplication.R
-import com.example.myapplication.openAbout
+
 
 fun checkBnToFirst() {
     Espresso.onView(ViewMatchers.withId(R.id.bnToFirst))
@@ -56,4 +55,13 @@ fun aboutFromThird() {
     Espresso.pressBack()
     Espresso.onView(ViewMatchers.withId(R.id.fragment3))
         .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+}
+
+fun navigateUp(n: Int) {
+    repeat(n) {
+        Espresso.onView(ViewMatchers.withContentDescription(R.string.nav_app_bar_navigate_up_description))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        Espresso.onView(ViewMatchers.withContentDescription(R.string.nav_app_bar_navigate_up_description))
+            .perform(ViewActions.click())
+    }
 }

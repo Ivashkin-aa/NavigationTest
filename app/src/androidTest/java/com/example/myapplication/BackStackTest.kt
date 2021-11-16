@@ -7,7 +7,6 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.navtest.*
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -55,5 +54,25 @@ class BackStackTest {
         aboutFromSecond()
         checkBnToThird()
         aboutFromThird()
+    }
+
+    @Test
+    fun fourthTest() {
+        Espresso.onView(withId(R.id.fragment1))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        checkBnToSecond()
+        openAbout()
+        navigateUp(1)
+        checkBnToThird()
+        checkBnToSecond()
+        navigateUp(1)
+        Espresso.onView(withId(R.id.fragment1))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        checkBnToSecond()
+        checkBnToThird()
+        openAbout()
+        navigateUp(3)
+        Espresso.onView(withId(R.id.fragment1))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }
